@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-const UiMenu = styled.div<{ pointerEvents: 'all' | 'none'}>`
+const UiMenu = styled.div<{ allPointerEvents: 'all' | 'none'}>`
   position: absolute;
-  pointer-events: ${({ pointerEvents }) => pointerEvents};
+  pointer-events: ${({ allPointerEvents: pointerEvents }) => pointerEvents};
   width: 100%;
   height: 100%;
 `;

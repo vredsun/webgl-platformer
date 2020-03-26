@@ -1,4 +1,4 @@
-const renderWebGl = (canvas: HTMLCanvasElement) => {
+const renderWebGl = (canvas: HTMLCanvasElement, isActive: boolean) => {
   console.info('renderWebGl');
 };
 
