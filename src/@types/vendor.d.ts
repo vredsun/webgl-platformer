@@ -1,3 +1,7 @@
+declare let __DEV__: string;
+declare let _VERSION_: string;
+declare let NODE_ENV: string;
+
 declare module '*.mp3' {
   const content: string;
   export default content;

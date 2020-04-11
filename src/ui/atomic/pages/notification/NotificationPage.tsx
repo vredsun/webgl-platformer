@@ -11,7 +11,7 @@ const NotificationPage: React.FC<Props> = React.memo(
 
     return (
       <UiMenu allPointerEvents="none">
-        <div>NotificationPage</div>
+        {/* <div>NotificationPage</div> */}
       </UiMenu>
     );
   },

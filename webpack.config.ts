@@ -3,8 +3,7 @@ import * as webpack from 'webpack';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-
-const BUILD_TIME = new Date().toLocaleString();
+import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -30,6 +29,7 @@ const getPlugins = () => {
     new webpack.NamedModulesPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
+      inject: 'head',
       template: BUILD.htmlTemplateName,
       publicPath: process.env.PUBLIC_PATH,
       hash: true,
@@ -45,9 +45,11 @@ const getPlugins = () => {
       'process.env.PUBLIC_PATH': JSON.stringify(process.env.PUBLIC_PATH),
       '__DEV__': isDevelopment,
       '_VERSION_': JSON.stringify(pkg.version),
-      '_RELEASE_DATE_': JSON.stringify(pkg.releaseDate),
       'NODE_ENV': JSON.stringify(process.env.NODE_ENV) || 'development',
-      '_BUILD_TIME_': JSON.stringify(BUILD_TIME),
+    }),
+    new MiniCssExtractPlugin({
+      filename: isDevelopment ? '[name].css' : '[name].[hash].css',
+      chunkFilename: isDevelopment ? '[id].css' : '[id].[hash].css',
     }),
   ];
 
@@ -146,6 +148,27 @@ const config: webpack.Configuration = {
             loader: 'file-loader',
           },
         ],
+      },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: isDevelopment,
+            },
+          },
+          {
+            loader: 'css-loader', // translates CSS into CommonJS
+            options: {
+              esModule: false,
+            }
+          },
+        ]
+      },
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
       },
     ],
   },

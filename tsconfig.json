@@ -7,7 +7,7 @@
     "declaration": true,
     "allowSyntheticDefaultImports": true,
     "pretty": true,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "removeComments": false,
     "isolatedModules": false,
     "experimentalDecorators": true,

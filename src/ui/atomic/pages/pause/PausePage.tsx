@@ -15,7 +15,7 @@ const PausePage: React.FC<Props> = React.memo(
 
     return (
       <UiMenu allPointerEvents={isShowingMenu ? 'all' : 'none'}>
-        <div>PausePage</div>
+        { isShowingMenu && <div>PausePage</div> }
       </UiMenu>
     );
   },

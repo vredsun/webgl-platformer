@@ -8,8 +8,13 @@ export const useInitialDataIsLoaded = (key: GAME_LOADING_NAMES) => {
 
   React.useEffect(
     () => {
-      dispatch(
-        changeLoadingStatusByNameOnFalse(key),
+      setTimeout(
+        () => {
+          dispatch(
+            changeLoadingStatusByNameOnFalse(key),
+          );
+        },
+        2000,
       );
     },
     [],

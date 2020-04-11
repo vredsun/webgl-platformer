@@ -7,13 +7,19 @@ import { selectIsInitialLoading } from 'store/loading/selectors';
 
 type Props = {};
 
-const LoadingContainer = styled.div`
+const LoadingContainer = styled.div<{ isVisible: boolean  }>`
   width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+
+  background-color: white;
+
+  opacity: ${({ isVisible }) => isVisible ? 1 : 0};
+
+  transition: opacity 500ms;
 `;
 
 const LoadingPage: React.FC<Props> = React.memo(
@@ -26,7 +32,7 @@ const LoadingPage: React.FC<Props> = React.memo(
 
     return (
       <UiMenu allPointerEvents={isVisible ? 'all' : 'none'}>
-        <LoadingContainer>
+        <LoadingContainer isVisible={isVisible}>
           {
             isVisible && (
               <React.Fragment>
